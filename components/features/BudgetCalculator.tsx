@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Input } from "@/components/ui/input";
-import { Sofa, Armchair, Bed, Camera, MessageCircle, ArrowRight, ArrowLeft } from "lucide-react";
+import { Sofa, Armchair, Bed, Camera, MessageCircle, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FURNITURE_TYPES = [

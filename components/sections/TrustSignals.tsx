@@ -10,7 +10,7 @@ const BRANDS = [
 export function TrustSignals() {
     return (
         <section className="py-12 bg-white border-t border-slate-100">
-            <div className="container px-4 mx-auto">
+            <div className="container px-4 md:px-6 mx-auto">
                 <p className="text-center text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-8">
                     Trabajamos con las mejores editoras textiles
                 </p>

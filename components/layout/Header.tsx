@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useScroll, useMotionValueEvent, motion } from "framer-motion";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";

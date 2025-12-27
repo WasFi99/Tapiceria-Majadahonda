@@ -23,7 +23,7 @@ export default function BoadillaPage() {
                 <p className="text-lg leading-relaxed mb-6">
                     En <strong>Boadilla del Monte</strong>, entendemos que cada mueble cuenta una historia.
                     Nos especializamos en trabajar con piezas de alto valor en urbanizaciones como <strong>Montepríncipe</strong> y <strong>Las Lomas</strong>,
-                    ofreciendo un servicio de <em>"Lujo Sostenible"</em>.
+                    ofreciendo un servicio de <em>&quot;Lujo Sostenible&quot;</em>.
                 </p>
                 <p className="text-lg leading-relaxed">
                     No solo cambiamos una tela; le ayudamos a <strong>recuperar recuerdos</strong>.

@@ -30,7 +30,7 @@ export function Hero({
                 <div className="absolute inset-0 bg-black/50" />
             </div>
 
-            <div className="container relative z-10 px-4 text-center text-white">
+            <div className="container relative z-10 px-4 md:px-6 text-center text-white">
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 drop-shadow-lg">
                     {title}
                 </h1>

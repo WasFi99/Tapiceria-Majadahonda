@@ -21,6 +21,7 @@ export function ModelViewer() {
 
     return (
         <div className="w-full h-[500px] bg-stone-100 rounded-2xl overflow-hidden shadow-inner flex items-center justify-center relative">
+            {/* @ts-ignore */}
             <model-viewer
                 src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/SheenChair/glTF-Binary/SheenChair.glb"
                 poster="/assets/images/hero-bg.png" // Fallback

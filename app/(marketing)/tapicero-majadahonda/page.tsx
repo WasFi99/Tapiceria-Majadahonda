@@ -25,7 +25,7 @@ export default function MajadahondaPage() {
                     Si vives por la <strong>Avenida de España</strong>, el <strong>Monte del Pilar</strong> o la zona del <strong>Gran Plaza 2</strong>, podemos recoger tu tresillo o butaca en el mismo día.
                 </p>
                 <p className="text-lg leading-relaxed">
-                    Apostamos por el <em>"Lujo Sostenible"</em>: no tires ese sofá de calidad. Permítenos <strong>recuperar tus recuerdos</strong> con telas antimanchas de última generación y
+                    Apostamos por el <em>&quot;Lujo Sostenible&quot;</em>: no tires ese sofá de calidad. Permítenos <strong>recuperar tus recuerdos</strong> con telas antimanchas de última generación y
                     un acabado artesanal que revaloriza tu hogar.
                 </p>
             </section>
