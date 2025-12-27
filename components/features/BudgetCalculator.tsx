@@ -17,9 +17,16 @@ const FURNITURE_TYPES = [
 ];
 
 const CONDITIONS = [
-    { id: "bueno", label: "Bueno (Solo tela)" },
-    { id: "regular", label: "Regular (Relleno vencido)" },
-    { id: "malo", label: "Malo (Estructura dañada)" },
+    { id: "cariño", label: "Necesita cariño (Desgate superficial)" },
+    { id: "restauracion", label: "Restauración completa (Relleno+Tela)" },
+    { id: "muy_danado", label: "Muy dañado (Estructura/Muelles)" },
+];
+
+const FABRICS = [
+    { id: "terciopelo", label: "Terciopelo (Lujo)" },
+    { id: "antimanchas", label: "Aquaclean (Antimanchas)" },
+    { id: "lino", label: "Lino (Natural)" },
+    { id: "piel", label: "Piel / Polipiel" },
 ];
 
 export function BudgetCalculator() {
@@ -27,6 +34,7 @@ export function BudgetCalculator() {
     const [data, setData] = React.useState({
         type: "",
         condition: "",
+        fabric: "",
         hasPhoto: false,
     });
 
@@ -34,10 +42,11 @@ export function BudgetCalculator() {
     const handleBack = () => setStep((p) => p - 1);
 
     const getWhatsAppLink = () => {
-        const text = `Hola Tapicería Majadahonda. Me gustaría un presupuesto para:
-- Mueble: ${FURNITURE_TYPES.find(f => f.id === data.type)?.label || 'Otro'}
+        const text = `Hola Tapicería Majadahonda. Quiero renovar un mueble:
+- Tipo: ${FURNITURE_TYPES.find(f => f.id === data.type)?.label || 'Otro'}
 - Estado: ${CONDITIONS.find(c => c.id === data.condition)?.label || 'No especificado'}
-${data.hasPhoto ? '(Adjuntaré foto a continuación)' : ''}`;
+- Preferencia Tela: ${FABRICS.find(f => f.id === data.fabric)?.label || 'A asesorar'}
+${data.hasPhoto ? '(Tengo la foto lista)' : ''}`;
 
         return `https://wa.me/34631543707?text=${encodeURIComponent(text)}`;
     };
@@ -46,8 +55,8 @@ ${data.hasPhoto ? '(Adjuntaré foto a continuación)' : ''}`;
         <section className="py-20 bg-slate-50" id="presupuesto">
             <div className="container px-4 mx-auto max-w-2xl">
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Calculadora de Presupuesto Exprés</h2>
-                    <p className="text-muted-foreground">Recibe una valoración aproximada por WhatsApp en minutos.</p>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2 font-serif">Asistente de Restauración</h2>
+                    <p className="text-muted-foreground">Diagnóstico preliminar y cita con experto en 1 minuto.</p>
                 </div>
 
                 <Card className="border-slate-200 shadow-xl overflow-hidden relative min-h-[400px]">
@@ -119,24 +128,25 @@ ${data.hasPhoto ? '(Adjuntaré foto a continuación)' : ''}`;
                                     exit={{ opacity: 0, x: -20 }}
                                     className="space-y-6"
                                 >
-                                    <Label className="text-lg font-semibold">3. Foto del mueble (Obligatorio)</Label>
-                                    <div className="border-2 border-dashed border-red-200 rounded-xl p-8 text-center bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer group" onClick={() => setData({ ...data, hasPhoto: true })}>
-                                        <div className="mx-auto w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                                            <Camera className="w-6 h-6 text-red-400" />
-                                        </div>
-                                        <p className="text-sm text-slate-600 mb-4 font-medium">
-                                            Es IMPOSIBLE dar un precio exacto sin ver el mueble.
-                                            <br />
-                                            <span className="text-xs text-muted-foreground font-normal">Toca aquí para confirmar que tienes la foto lista para enviar.</span>
-                                        </p>
-                                        <Button variant="outline" className="border-red-200 text-red-700 hover:bg-red-100 hover:text-red-900">
-                                            {data.hasPhoto ? "¡Foto Confirmada!" : "Tengo la foto lista"}
-                                        </Button>
+                                    <Label className="text-lg font-semibold">3. ¿Qué acabado buscas?</Label>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {FABRICS.map((f) => (
+                                            <button
+                                                key={f.id}
+                                                onClick={() => setData({ ...data, fabric: f.id })}
+                                                className={`p-4 rounded-lg border text-left transition-all ${data.fabric === f.id
+                                                    ? "border-secondary bg-secondary/10 text-secondary-foreground font-medium"
+                                                    : "border-slate-100 hover:border-slate-200 bg-white"
+                                                    }`}
+                                            >
+                                                {f.label}
+                                            </button>
+                                        ))}
                                     </div>
                                     <div className="flex justify-between pt-4">
                                         <Button variant="ghost" onClick={handleBack}>Atrás</Button>
-                                        <Button onClick={handleNext} disabled={!data.hasPhoto} className="gap-2 bg-red-600 hover:bg-red-700 text-white">
-                                            Ver Análisis <ArrowRight className="w-4 h-4" />
+                                        <Button onClick={handleNext} disabled={!data.fabric} className="gap-2">
+                                            Siguiente <ArrowRight className="w-4 h-4" />
                                         </Button>
                                     </div>
                                 </motion.div>
@@ -145,6 +155,37 @@ ${data.hasPhoto ? '(Adjuntaré foto a continuación)' : ''}`;
                             {step === 4 && (
                                 <motion.div
                                     key="step4"
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: -20 }}
+                                    className="space-y-6"
+                                >
+                                    <Label className="text-lg font-semibold">4. Foto del mueble (Crucial)</Label>
+                                    <div className="border-2 border-dashed border-red-200 rounded-xl p-8 text-center bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer group" onClick={() => setData({ ...data, hasPhoto: true })}>
+                                        <div className="mx-auto w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                            <Camera className="w-6 h-6 text-red-400" />
+                                        </div>
+                                        <p className="text-sm text-slate-600 mb-4 font-medium">
+                                            Para un diagnóstico preciso, necesitamos ver la pieza.
+                                            <br />
+                                            <span className="text-xs text-muted-foreground font-normal">Confirma que tienes la foto lista para enviarla al Maestro Tapicero.</span>
+                                        </p>
+                                        <Button variant="outline" className={`border-red-200 ${data.hasPhoto ? 'bg-red-100 text-red-800' : 'text-red-700'}`}>
+                                            {data.hasPhoto ? "¡Foto Confirmada!" : "Tengo la foto lista"}
+                                        </Button>
+                                    </div>
+                                    <div className="flex justify-between pt-4">
+                                        <Button variant="ghost" onClick={handleBack}>Atrás</Button>
+                                        <Button onClick={handleNext} disabled={!data.hasPhoto} className="gap-2 bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-200">
+                                            Ver Análisis <ArrowRight className="w-4 h-4" />
+                                        </Button>
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {step === 5 && (
+                                <motion.div
+                                    key="step5"
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -20 }}
@@ -179,7 +220,7 @@ ${data.hasPhoto ? '(Adjuntaré foto a continuación)' : ''}`;
                         <motion.div
                             className="h-full bg-secondary"
                             initial={{ width: "25%" }}
-                            animate={{ width: `${step * 25}%` }}
+                            animate={{ width: `${step * 20}%` }}
                         />
                     </div>
                 </Card>

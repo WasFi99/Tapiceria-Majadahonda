@@ -19,12 +19,14 @@ export default function MajadahondaPage() {
             />
             <ServiceGrid />
             <section className="py-16 container mx-auto px-4 prose prose-slate lg:prose-lg max-w-4xl text-center">
-                <h2 className="text-3xl font-bold text-primary">Tu Tapicería Local en Calle la Flauta Mágica</h2>
-                <p>
+                <h2 className="text-3xl font-bold text-primary font-serif mb-6">Tu Tapicería Local en Calle la Flauta Mágica</h2>
+                <p className="text-lg leading-relaxed mb-6">
                     Somos tus vecinos. Nuestro taller en el corazón de <strong>Majadahonda</strong> (28222) nos permite ofrecer una respuesta inmediata a cualquier necesidad de restauración.
                     Si vives por la <strong>Avenida de España</strong>, el <strong>Monte del Pilar</strong> o la zona del <strong>Gran Plaza 2</strong>, podemos recoger tu tresillo o butaca en el mismo día.
-                    Sin intermediarios ni costes extra de desplazamiento. Ven a vernos o te visitamos nosotros.
-                    Especialistas en la recuperación de muebles antiguos y modernos con tejidos antimanchas de última generación.
+                </p>
+                <p className="text-lg leading-relaxed">
+                    Apostamos por el <em>"Lujo Sostenible"</em>: no tires ese sofá de calidad. Permítenos <strong>recuperar tus recuerdos</strong> con telas antimanchas de última generación y
+                    un acabado artesanal que revaloriza tu hogar.
                 </p>
             </section>
             <BeforeAfterSlider />
