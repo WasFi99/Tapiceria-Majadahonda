@@ -41,7 +41,7 @@ export function Header() {
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
                 isScrolled
-                    ? "bg-white/10 backdrop-blur-md border-b border-white/20 shadow-sm" // Glassmorphism
+                    ? "bg-white/90 backdrop-blur-md border-b border-stone-100 shadow-sm" // Solid enough to read dark text
                     : "bg-transparent border-transparent"
             )}
         >
@@ -95,9 +95,17 @@ export function Header() {
                     </Button>
                 </nav>
 
-                {/* Mobile Nav */}
                 <div className="flex md:hidden items-center gap-4">
-                    <Button asChild size="sm" className="gap-2 font-semibold shadow-md">
+                    <Button
+                        asChild
+                        size="sm"
+                        className={cn(
+                            "gap-2 font-semibold shadow-md transition-colors",
+                            isScrolled || isLightPage
+                                ? "bg-primary text-white hover:bg-primary/90"
+                                : "bg-white text-primary hover:bg-stone-100" // Inverted on transparent header
+                        )}
+                    >
                         <a href="tel:+34631543707">
                             <Phone className="w-4 h-4" />
                             Llamar
