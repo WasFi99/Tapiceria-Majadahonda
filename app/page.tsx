@@ -9,6 +9,7 @@ import { ContactForm } from "@/components/features/ContactForm";
 export default function Home() {
   return (
     <main className="min-h-screen bg-background font-sans selection:bg-secondary selection:text-white">
+      <link rel="amphtml" href="https://tapiceriamajadahonda.es/amp" />
       <Header />
       <Hero />
       <TrustSignals />

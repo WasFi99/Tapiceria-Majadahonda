@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function SofaPage() {
     return (
         <article>
+            <link rel="amphtml" href="https://tapiceriamajadahonda.es/amp/servicios/restauracion-sofas" />
             {/* Hero Service */}
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <Image

@@ -33,6 +33,7 @@ const ARTICLES = [
 export default function BlogIndex() {
     return (
         <main className="min-h-screen bg-background font-sans">
+            <link rel="amphtml" href="https://tapiceriamajadahonda.es/amp/blog" />
             <Header />
             <div className="py-20 bg-slate-900 text-white text-center">
                 <h1 className="text-4xl md:text-6xl font-bold mb-4">Consejos de Maestro Tapicero</h1>
