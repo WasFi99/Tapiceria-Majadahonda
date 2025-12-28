@@ -45,7 +45,7 @@ export function Header() {
                     : "bg-transparent border-transparent"
             )}
         >
-            <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+            <div className="w-full max-w-[100vw] px-4 md:px-8 h-20 flex items-center justify-between">
                 {/* Logo */}
                 <Link
                     href="/"
