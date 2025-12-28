@@ -1,18 +1,8 @@
 "use client";
 
-import ReactBeforeSliderComponent from 'react-before-after-slider-component';
-import 'react-before-after-slider-component/dist/build.css';
+import { BeforeAfterSliderCustom } from "./BeforeAfterSliderCustom";
 
 export function BeforeAfterSlider() {
-    const FIRST_IMAGE = {
-        imageUrl: '/assets/images/before-after/sofa-new.webp',
-        alt: 'Sofá restaurado con tela antimanchas'
-    };
-    const SECOND_IMAGE = {
-        imageUrl: '/assets/images/before-after/sofa-old.webp',
-        alt: 'Sofá antiguo desgastado'
-    };
-
     return (
         <section className="py-20 bg-stone-50 overflow-hidden">
             <div className="container px-4 mx-auto">
@@ -43,16 +33,14 @@ export function BeforeAfterSlider() {
                         </div>
                     </div>
 
-                    <div className="w-full lg:w-1/2 h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl relative">
-                        {/* Placeholder until real images are generated, using logic to handle missing images if needed or simply rendering the component which handles it? 
-                     Actually the component needs valid URLs. I will use the Hero image as 'new' and a placeholder for 'old' temporarily if not generated. 
-                     But I will generate them. For now this code expects them. */}
-                        <ReactBeforeSliderComponent
-                            firstImage={FIRST_IMAGE}
-                            secondImage={SECOND_IMAGE}
-                            currentPercentPosition={50}
-                            delimiterColor="#b45309"
-                            className="h-full w-full object-cover"
+                    <div className="w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl">
+                        <BeforeAfterSliderCustom
+                            beforeSrc="/assets/images/before-after/sofa-old.webp"
+                            afterSrc="/assets/images/before-after/sofa-new.webp"
+                            beforeAlt="Sofá antiguo desgastado"
+                            afterAlt="Sofá restaurado con tela antimanchas"
+                            width={665}
+                            height={665}
                         />
                     </div>
                 </div>
