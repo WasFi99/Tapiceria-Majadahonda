@@ -1,10 +1,24 @@
+import dynamic from "next/dynamic";
 import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
-import { ServiceGrid } from "@/components/sections/ServiceGrid";
-import { BeforeAfterSlider } from "@/components/features/BeforeAfterSlider";
-import { BudgetCalculator } from "@/components/features/BudgetCalculator";
 import { TrustSignals } from "@/components/sections/TrustSignals";
-import { ContactForm } from "@/components/features/ContactForm";
+import { ServiceGrid } from "@/components/sections/ServiceGrid";
+
+// Lazy load below-fold components
+const BeforeAfterSlider = dynamic(
+  () => import("@/components/features/BeforeAfterSlider").then(mod => ({ default: mod.BeforeAfterSlider })),
+  { ssr: true }
+);
+
+const BudgetCalculator = dynamic(
+  () => import("@/components/features/BudgetCalculator").then(mod => ({ default: mod.BudgetCalculator })),
+  { ssr: true }
+);
+
+const ContactForm = dynamic(
+  () => import("@/components/features/ContactForm").then(mod => ({ default: mod.ContactForm })),
+  { ssr: true }
+);
 
 export default function Home() {
   return (
@@ -19,4 +33,3 @@ export default function Home() {
     </main>
   );
 }
-
