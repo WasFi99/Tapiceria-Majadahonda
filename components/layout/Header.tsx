@@ -114,8 +114,17 @@ export function Header() {
 
                     <Sheet>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" aria-label="Menu" className={isScrolled || isLightPage ? "text-primary" : "text-white"}>
-                                <Menu className="w-6 h-6" />
+                            <Button
+                                size="icon"
+                                aria-label="Menu"
+                                className={cn(
+                                    "rounded-full shadow-md transition-colors",
+                                    isScrolled || isLightPage
+                                        ? "bg-primary text-white hover:bg-primary/90"
+                                        : "bg-white text-primary hover:bg-stone-100"
+                                )}
+                            >
+                                <Menu className="w-5 h-5" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px] sm:w-[400px]">

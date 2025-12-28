@@ -19,12 +19,21 @@ export function FurnitureViewer({ modelSrc, posterSrc }: FurnitureViewerProps) {
     const [texture, setTexture] = useState<string>('base');
     const viewerRef = useRef<HTMLElement>(null);
 
+    const textureCache = useRef<Map<string, any>>(new Map());
+
     useEffect(() => {
         const viewer = viewerRef.current;
         if (!viewer) return;
 
         const handleLoad = () => setIsLoaded(true);
         viewer.addEventListener('load', handleLoad);
+
+        // Preload textures
+        const texturls = ['/assets/textures/linen-beige.png', '/assets/textures/velvet-green.png'];
+        texturls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
 
         return () => {
             viewer.removeEventListener('load', handleLoad);
@@ -37,7 +46,12 @@ export function FurnitureViewer({ modelSrc, posterSrc }: FurnitureViewerProps) {
 
         try {
             const material = viewer.model.materials[0];
-            const texture = await viewer.createTexture(textureUrl);
+
+            let texture = textureCache.current.get(textureUrl);
+            if (!texture) {
+                texture = await viewer.createTexture(textureUrl);
+                textureCache.current.set(textureUrl, texture);
+            }
 
             if (type === 'baseColorTexture') {
                 material.pbrMetallicRoughness.baseColorTexture.setTexture(texture);
@@ -104,6 +118,11 @@ export function FurnitureViewer({ modelSrc, posterSrc }: FurnitureViewerProps) {
                     onClick={() => swapTexture('/assets/textures/linen-beige.png')}
                     className="w-8 h-8 rounded-full bg-[#D4C4A8] border-2 border-white ring-2 ring-transparent focus:ring-[#D4C4A8] transition-all"
                     title="Lino Beige"
+                />
+                <button
+                    onClick={() => swapTexture('/assets/textures/velvet-green.png')}
+                    className="w-8 h-8 rounded-full bg-[#1B4D3E] border-2 border-white ring-2 ring-transparent focus:ring-[#1B4D3E] transition-all"
+                    title="Terciopelo Verde"
                 />
             </div>
         </div>
