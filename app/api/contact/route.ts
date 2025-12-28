@@ -1,12 +1,19 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-// Lazy initialization to avoid build errors
-const getResend = () => new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
-    const { name, phone, email, message } = await request.json();
+    // Check if API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return NextResponse.json(
+        { error: "Configuración del servidor incompleta. Contacta al administrador." },
+        { status: 500 }
+      );
+    }
+
+    const body = await request.json();
+    const { name, phone, email, message } = body;
 
     // Validate required fields
     if (!name || !phone || !email || !message) {
@@ -16,9 +23,11 @@ export async function POST(request: Request) {
       );
     }
 
+    // Initialize Resend with API key
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     // Send email using Resend
-    // Note: Using onboarding@resend.dev until custom domain is verified
-    const { data, error } = await getResend().emails.send({
+    const { data, error } = await resend.emails.send({
       from: "Tapicería Majadahonda <onboarding@resend.dev>",
       to: ["majadahondatapicero@gmail.com"],
       replyTo: email,
@@ -59,16 +68,18 @@ export async function POST(request: Request) {
     if (error) {
       console.error("Resend error:", JSON.stringify(error));
       return NextResponse.json(
-        { error: `Error al enviar: ${error.message || 'Unknown error'}` },
+        { error: `Error de Resend: ${error.message || JSON.stringify(error)}` },
         { status: 500 }
       );
     }
 
+    console.log("Email sent successfully:", data?.id);
     return NextResponse.json({ success: true, id: data?.id });
-  } catch (error) {
-    console.error("API error:", error);
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : "Unknown error";
+    console.error("API error:", errorMessage);
     return NextResponse.json(
-      { error: "Error del servidor" },
+      { error: `Error del servidor: ${errorMessage}` },
       { status: 500 }
     );
   }
