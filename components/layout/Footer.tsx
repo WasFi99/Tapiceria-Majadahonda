@@ -12,7 +12,7 @@ export function Footer() {
                     <h3 className="text-2xl font-serif font-bold text-white tracking-tight">
                         Tapicería<span className="text-secondary italic">Majadahonda</span>
                     </h3>
-                    <p className="leading-relaxed text-stone-300">
+                    <p className="leading-relaxed text-stone-200">
                         Rescatamos la esencia de tus muebles con técnicas artesanales y materiales de vanguardia. Lujo sostenible para tu hogar.
                     </p>
                     <div className="flex gap-4">
@@ -73,7 +73,7 @@ export function Footer() {
                 </div>
             </div>
 
-            <div className="border-t border-white/10 pt-8 text-center text-xs text-stone-500">
+            <div className="border-t border-white/10 pt-8 text-center text-xs text-stone-300">
                 <p>&copy; {new Date().getFullYear()} Tapicería Majadahonda. Todos los derechos reservados.</p>
             </div>
         </footer>
