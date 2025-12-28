@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Inter } from "next/font/google";
-import "./globals.css";
+import "../../globals.css";
 
 const bodoniModa = Bodoni_Moda({
   variable: "--font-bodoni",
