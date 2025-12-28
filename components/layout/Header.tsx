@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useScroll, useMotionValueEvent, motion } from "framer-motion";
 import { Phone, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -11,10 +10,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 export function Header() {
-    const { scrollY } = useScroll();
     const pathname = usePathname();
-    const [hidden, setHidden] = React.useState(false);
-    const [prevScroll, setPrevScroll] = React.useState(0);
     const [isScrolled, setIsScrolled] = React.useState(false);
 
     // Force "scrolled" style (dark text) on light pages without dark hero
@@ -23,9 +19,18 @@ export function Header() {
         pathname?.startsWith("/tapicero-") ||
         pathname?.startsWith("/blog");
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        setIsScrolled(latest > 20);
-    });
+    // Native scroll detection instead of Framer Motion
+    React.useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+
+        // Check initial scroll position
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const routes = [
         { href: "/tapicero-majadahonda", label: "Majadahonda" },
@@ -34,19 +39,12 @@ export function Header() {
     ];
 
     return (
-        <motion.header
-            variants={{
-                visible: { y: 0 },
-                hidden: { y: "-100%" },
-            }}
-            animate="visible"
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+        <header
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
                 isScrolled || isLightPage
                     ? "bg-white/95 backdrop-blur-md shadow-sm"
                     : "bg-transparent",
-                // Only show border when scrolled AND has shadow
                 isScrolled ? "border-b border-stone-100/50" : "border-b border-transparent"
             )}
         >
@@ -178,6 +176,6 @@ export function Header() {
                     </Sheet>
                 </div>
             </div>
-        </motion.header>
+        </header>
     );
 }
