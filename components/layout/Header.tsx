@@ -17,8 +17,11 @@ export function Header() {
     const [prevScroll, setPrevScroll] = React.useState(0);
     const [isScrolled, setIsScrolled] = React.useState(false);
 
-    // Force "scrolled" style (dark text) on light pages like showroom
-    const isLightPage = pathname === "/showroom";
+    // Force "scrolled" style (dark text) on light pages without dark hero
+    const isLightPage = pathname === "/showroom" ||
+        pathname?.startsWith("/servicios") ||
+        pathname?.startsWith("/tapicero-") ||
+        pathname?.startsWith("/blog");
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         setIsScrolled(latest > 20);
