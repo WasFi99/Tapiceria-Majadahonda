@@ -5,13 +5,11 @@ import "../globals.css";
 const bodoniModa = Bodoni_Moda({
   variable: "--font-bodoni",
   subsets: ["latin"],
-  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap",
 });
 
 export const viewport: Viewport = {
@@ -38,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Tapicería Majadahonda",
     images: [
       {
-        url: "/assets/images/hero-bg.png",
+        url: "/assets/images/hero-bg.png", // We verified this exists
         width: 1200,
         height: 630,
         alt: "Taller de Tapicería en Majadahonda",
@@ -74,15 +72,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <head>
-        {/* Preload hero image for faster LCP */}
-        <link
-          rel="preload"
-          href="/assets/images/hero-luxury.webp"
-          as="image"
-          type="image/webp"
-        />
-      </head>
       <body
         className={`${bodoniModa.variable} ${inter.variable} antialiased`}
       >
@@ -139,5 +128,6 @@ export default function RootLayout({
         />
       </body>
     </html>
+
   );
 }
