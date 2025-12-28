@@ -149,8 +149,6 @@
   body {
     max-width: 100%;
     overflow-x: hidden;
-    touch-action: pan-y;
-    /* Disables horizontal scroll gestures mostly */
   }
 
   body {

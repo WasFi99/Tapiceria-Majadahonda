@@ -52,7 +52,7 @@ export function TrustSignals() {
                     - gap-12 / md:gap-32 prevents overlapping text.
                     - [&::-webkit-scrollbar]:hidden hides scrollbars for a clean look.
                 */}
-                    <div className="flex md:animate-marquee overflow-x-auto md:overflow-visible gap-12 md:gap-32 items-center px-4 w-full md:w-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                    <div className="flex md:animate-marquee overflow-x-auto md:overflow-visible gap-12 md:gap-32 items-center px-4 w-full md:w-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none'] select-none touch-pan-x cursor-grab active:cursor-grabbing">
                         {ALL_BRANDS.map((brand, i) => (
                             <BrandItem key={i} brand={brand} />
                         ))}

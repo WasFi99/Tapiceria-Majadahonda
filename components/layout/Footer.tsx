@@ -74,7 +74,7 @@ export function Footer() {
             </div>
 
             <div className="border-t border-white/10 pt-8 text-center text-xs text-stone-500">
-                <p>&copy; {new Date().getFullYear()} Tapicería Majadahonda. Todos los derechos reservados. <span className="opacity-30">v2.4 (Swipeable Menu)</span></p>
+                <p>&copy; {new Date().getFullYear()} Tapicería Majadahonda. Todos los derechos reservados. <span className="opacity-30">v2.5 (Touch & Center Fix)</span></p>
             </div>
         </footer>
     );

@@ -132,16 +132,16 @@ export function Header() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                            <div className="flex flex-col gap-6 mt-6">
-                                <SheetTitle className="text-left text-lg font-bold">
-                                    Menú
+                            <div className="flex flex-col gap-8 mt-10 items-center">
+                                <SheetTitle className="text-center text-2xl font-serif font-bold">
+                                    Navegación
                                 </SheetTitle>
-                                <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-6 w-full items-center">
                                     {routes.map((route) => (
                                         <Link
                                             key={route.href}
                                             href={route.href}
-                                            className="text-lg font-medium hover:text-secondary transition-colors border-b pb-2"
+                                            className="text-xl font-medium hover:text-secondary transition-colors w-full text-center py-2"
                                         >
                                             {route.label}
                                         </Link>
@@ -154,14 +154,14 @@ export function Header() {
                                                 window.scrollTo({ top: 0, behavior: "smooth" });
                                             }
                                         }}
-                                        className="text-lg font-medium hover:text-secondary transition-colors border-b pb-2"
+                                        className="text-xl font-medium hover:text-secondary transition-colors w-full text-center py-2"
                                     >
                                         Inicio
                                     </Link>
                                 </div>
-                                <div className="mt-4">
-                                    <p className="text-sm text-muted-foreground mb-2">Contacto Urgente:</p>
-                                    <Button asChild className="w-full gap-2 text-lg py-6">
+                                <div className="mt-8 w-full px-8">
+                                    <p className="text-sm text-muted-foreground mb-4 text-center uppercase tracking-widest">Contacto Urgente</p>
+                                    <Button asChild className="w-full gap-2 text-lg py-6 rounded-full shadow-lg">
                                         <a href="tel:+34631543707">
                                             <Phone className="w-5 h-5" />
                                             631 543 707
