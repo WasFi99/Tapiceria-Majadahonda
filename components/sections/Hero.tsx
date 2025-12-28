@@ -12,7 +12,7 @@ interface HeroProps {
 export function Hero({
     title = <>Renovamos tus Muebles,<br className="hidden sm:block" /> <span className="text-secondary bg-clip-text">Recuperamos tus Recuerdos.</span></>,
     subtitle = "Artesanía, lujo y rapidez en Majadahonda. Especialistas en telas antimanchas Aquaclean.",
-    imageSrc = "/assets/images/hero-luxury.png",
+    imageSrc = "/assets/images/hero-luxury.webp",
     imageAlt = "Sofá de terciopelo esmeralda en salón de lujo parisino"
 }: HeroProps) {
     return (

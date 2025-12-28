@@ -31,7 +31,7 @@ export default function ChairsPage() {
                 <div className="container px-4 mx-auto grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-stone-100 order-2 md:order-1">
                         <Image
-                            src="/assets/images/fabric-samples-luxury.png"
+                            src="/assets/images/fabric-samples-luxury.webp"
                             alt="Proceso de restauración"
                             fill
                             className="object-cover"

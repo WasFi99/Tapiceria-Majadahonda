@@ -5,11 +5,11 @@ import 'react-before-after-slider-component/dist/build.css';
 
 export function BeforeAfterSlider() {
     const FIRST_IMAGE = {
-        imageUrl: '/assets/images/before-after/sofa-new.jpg',
+        imageUrl: '/assets/images/before-after/sofa-new.webp',
         alt: 'Sofá restaurado con tela antimanchas'
     };
     const SECOND_IMAGE = {
-        imageUrl: '/assets/images/before-after/sofa-old.jpg',
+        imageUrl: '/assets/images/before-after/sofa-old.webp',
         alt: 'Sofá antiguo desgastado'
     };
 
