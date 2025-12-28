@@ -2,7 +2,6 @@ import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { BeforeAfterSlider } from "@/components/features/BeforeAfterSlider";
-import { BudgetCalculator } from "@/components/features/BudgetCalculator";
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { ContactForm } from "@/components/features/ContactForm";
 
@@ -14,7 +13,6 @@ export default function Home() {
       <TrustSignals />
       <ServiceGrid />
       <BeforeAfterSlider />
-      <BudgetCalculator />
       <ContactForm />
     </main>
   );
