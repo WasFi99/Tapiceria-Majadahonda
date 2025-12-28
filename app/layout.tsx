@@ -77,7 +77,7 @@ export default function RootLayout({
       <body
         className={`${bodoniModa.variable} ${inter.variable} antialiased`}
       >
-        <div className="relative min-h-screen flex flex-col">
+        <div className="relative min-h-screen flex flex-col overflow-x-hidden w-full">
           <div className="flex-1">
             {children}
           </div>

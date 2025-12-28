@@ -45,7 +45,7 @@ export function Header() {
                     : "bg-transparent border-transparent"
             )}
         >
-            <div className="w-full max-w-[100vw] px-4 md:px-8 h-20 flex items-center justify-between">
+            <div className="w-full px-4 md:px-8 h-20 flex items-center justify-between">
                 {/* Logo */}
                 <Link
                     href="/"
@@ -58,7 +58,7 @@ export function Header() {
                     className="flex items-center gap-2 z-50 group"
                 >
                     <span className={cn(
-                        "text-2xl font-serif font-bold tracking-tight transition-colors",
+                        "text-lg md:text-2xl font-serif font-bold tracking-tight transition-colors",
                         isScrolled || isLightPage ? "text-primary" : "text-white"
                     )}>
                         Tapicería<span className="text-secondary italic">Majadahonda</span>
