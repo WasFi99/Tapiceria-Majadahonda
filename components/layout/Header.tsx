@@ -40,9 +40,11 @@ export function Header() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
-                isScrolled
-                    ? "bg-white/90 backdrop-blur-md border-b border-stone-100 shadow-sm" // Solid enough to read dark text
-                    : "bg-transparent border-transparent"
+                // Mobile: Always solid white
+                "bg-white border-b border-stone-100 shadow-sm",
+                // Desktop: Transparent at top, solid when scrolled
+                "md:bg-transparent md:border-transparent md:shadow-none",
+                isScrolled && "md:bg-white/90 md:backdrop-blur-md md:border-b md:border-stone-100 md:shadow-sm"
             )}
         >
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -59,7 +61,11 @@ export function Header() {
                 >
                     <span className={cn(
                         "text-2xl font-serif font-bold tracking-tight transition-colors",
-                        isScrolled || isLightPage ? "text-primary" : "text-white"
+                        // Mobile: Always primary
+                        "text-primary",
+                        // Desktop: White at top, Primary if scrolled or light page
+                        "md:text-white",
+                        (isScrolled || isLightPage) && "md:text-primary"
                     )}>
                         Tapicería<span className="text-secondary italic">Majadahonda</span>
                     </span>
@@ -100,10 +106,11 @@ export function Header() {
                         asChild
                         size="sm"
                         className={cn(
-                            "gap-2 font-semibold shadow-md transition-colors",
-                            isScrolled || isLightPage
-                                ? "bg-primary text-white hover:bg-primary/90"
-                                : "bg-white text-primary hover:bg-stone-100" // Inverted on transparent header
+                            "rounded-full shadow-md transition-colors",
+                            // Mobile: Always Primary background
+                            "bg-primary text-white hover:bg-primary/90",
+                            // Desktop (hidden anyway but strictly speaking logic):
+                            "md:bg-white md:text-primary"
                         )}
                     >
                         <a href="tel:+34631543707">
@@ -117,12 +124,7 @@ export function Header() {
                             <Button
                                 size="icon"
                                 aria-label="Menu"
-                                className={cn(
-                                    "rounded-full shadow-md transition-colors",
-                                    isScrolled || isLightPage
-                                        ? "bg-primary text-white hover:bg-primary/90"
-                                        : "bg-white text-primary hover:bg-stone-100"
-                                )}
+                                className="rounded-full shadow-md bg-primary text-white hover:bg-primary/90"
                             >
                                 <Menu className="w-5 h-5" />
                             </Button>
