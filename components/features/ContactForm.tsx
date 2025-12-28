@@ -19,6 +19,7 @@ const formSchema = z.object({
 export function ContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -26,11 +27,29 @@ export function ContactForm() {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log(values);
-        setIsSubmitting(false);
-        setIsSuccess(true);
+        setError(null);
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Error al enviar el mensaje");
+            }
+
+            setIsSuccess(true);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Error al enviar el mensaje");
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     if (isSuccess) {
@@ -104,6 +123,12 @@ export function ContactForm() {
                                 <Textarea {...form.register("message")} placeholder="¿Qué necesitas tapizar?" className="bg-stone-50 border-stone-200 min-h-[120px]" />
                                 {form.formState.errors.message && <p className="text-red-500 text-xs">{form.formState.errors.message.message}</p>}
                             </div>
+
+                            {error && (
+                                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                                    {error}
+                                </div>
+                            )}
 
                             <Button type="submit" className="w-full h-12 text-lg bg-primary hover:bg-primary/90 text-white" disabled={isSubmitting}>
                                 {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <><Send className="w-4 h-4 mr-2" /> Enviar Consulta</>}
