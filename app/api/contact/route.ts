@@ -2,17 +2,24 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  console.log("=== Contact API Called ===");
+
   try {
     // Check if API key is configured
-    if (!process.env.RESEND_API_KEY) {
-      console.error("RESEND_API_KEY is not configured");
+    const apiKey = process.env.RESEND_API_KEY;
+    console.log("API Key exists:", !!apiKey);
+    console.log("API Key starts with:", apiKey?.substring(0, 10) || "NONE");
+
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "Configuración del servidor incompleta. Contacta al administrador." },
+        { error: "Configuración del servidor incompleta. API key no encontrada." },
         { status: 500 }
       );
     }
 
     const body = await request.json();
+    console.log("Request body received:", JSON.stringify(body));
+
     const { name, phone, email, message } = body;
 
     // Validate required fields
@@ -24,11 +31,12 @@ export async function POST(request: Request) {
     }
 
     // Initialize Resend with API key
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(apiKey);
+    console.log("Resend initialized, sending email...");
 
-    // Send email using Resend
+    // Send email using verified domain
     const { data, error } = await resend.emails.send({
-      from: "Tapicería Majadahonda <onboarding@resend.dev>",
+      from: "Tapicería Majadahonda <contacto@tapiceriamajadahonda.es>",
       to: ["majadahondatapicero@gmail.com"],
       replyTo: email,
       subject: `Nueva consulta de ${name} - Tapicería Majadahonda`,
@@ -65,6 +73,8 @@ export async function POST(request: Request) {
       `,
     });
 
+    console.log("Resend response - data:", data, "error:", error);
+
     if (error) {
       console.error("Resend error:", JSON.stringify(error));
       return NextResponse.json(
@@ -76,10 +86,10 @@ export async function POST(request: Request) {
     console.log("Email sent successfully:", data?.id);
     return NextResponse.json({ success: true, id: data?.id });
   } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : "Unknown error";
-    console.error("API error:", errorMessage);
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    console.error("API catch error:", errorMessage);
     return NextResponse.json(
-      { error: `Error del servidor: ${errorMessage}` },
+      { error: `Error: ${errorMessage}` },
       { status: 500 }
     );
   }
