@@ -38,7 +38,7 @@ export function Hero({
                     {subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button size="lg" className="text-lg px-8 py-6 w-full sm:w-auto gap-2 bg-[#1a8c4a] hover:bg-[#0f6b38] text-white shadow-xl hover:shadow-2xl transition-all border-none font-bold" asChild>
+                    <Button size="lg" className="text-lg px-8 py-6 w-full sm:w-auto gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-stone-900 shadow-xl hover:shadow-2xl transition-all border-none font-bold" asChild>
                         <a href="https://wa.me/34631543707?text=Hola,%20me%20gustar%C3%ADa%20pedir%20presupuesto%20para%20tapizar..." target="_blank" rel="noopener noreferrer">
                             <MessageCircle className="w-6 h-6" />
                             Pedir Presupuesto WhatsApp
