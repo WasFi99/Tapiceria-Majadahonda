@@ -19,7 +19,7 @@ export function TrustSignals() {
             {/* Infinite Marquee Wrapper */}
             <div className="relative flex overflow-hidden">
                 {/* Two sets of brands for seamless looping */}
-                <div className="flex animate-marquee whitespace-nowrap gap-16 min-w-full items-center justify-around px-8">
+                <div className="flex animate-marquee whitespace-nowrap gap-8 min-w-full items-center justify-around px-4">
                     {BRANDS.map((brand, i) => (
                         <BrandItem key={i} brand={brand} />
                     ))}
@@ -48,8 +48,8 @@ export function TrustSignals() {
 
 function BrandItem({ brand }: { brand: { name: string, description: string } }) {
     return (
-        <div className="flex flex-col items-center text-center mx-8 min-w-[200px] hover:scale-105 transition-transform duration-300">
-            <span className="text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors cursor-default">
+        <div className="flex flex-col items-center text-center mx-4 min-w-[160px] hover:scale-105 transition-transform duration-300">
+            <span className="text-2xl sm:text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors cursor-default">
                 {brand.name}
             </span>
         </div>
