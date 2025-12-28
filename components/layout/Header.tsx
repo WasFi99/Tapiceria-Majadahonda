@@ -8,20 +8,19 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
+import { usePathname } from "next/navigation";
+
 export function Header() {
     const { scrollY } = useScroll();
+    const pathname = usePathname();
     const [hidden, setHidden] = React.useState(false);
     const [prevScroll, setPrevScroll] = React.useState(0);
     const [isScrolled, setIsScrolled] = React.useState(false);
 
+    // Force "scrolled" style (dark text) on light pages like showroom
+    const isLightPage = pathname === "/showroom";
+
     useMotionValueEvent(scrollY, "change", (latest) => {
-        const previous = prevScroll;
-        if (latest > previous && latest > 150) {
-            setHidden(true);
-        } else {
-            setHidden(false);
-        }
-        setPrevScroll(latest);
         setIsScrolled(latest > 20);
     });
 
@@ -37,38 +36,58 @@ export function Header() {
                 visible: { y: 0 },
                 hidden: { y: "-100%" },
             }}
-            animate={hidden ? "hidden" : "visible"}
+            animate="visible"
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 w-full border-b transition-colors duration-200",
+                "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
                 isScrolled
-                    ? "bg-background/95 backdrop-blur-md border-border shadow-sm"
+                    ? "bg-white/10 backdrop-blur-md border-b border-white/20 shadow-sm" // Glassmorphism
                     : "bg-transparent border-transparent"
             )}
         >
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div className="container mx-auto px-4 h-20 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 z-50">
-                    <span className="text-xl font-bold tracking-tight text-primary">
-                        Tapicería<span className="text-secondary">Majadahonda</span>
+                <Link
+                    href="/"
+                    onClick={(e) => {
+                        if (pathname === "/") {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                    }}
+                    className="flex items-center gap-2 z-50 group"
+                >
+                    <span className={cn(
+                        "text-2xl font-serif font-bold tracking-tight transition-colors",
+                        isScrolled || isLightPage ? "text-primary" : "text-white"
+                    )}>
+                        Tapicería<span className="text-secondary italic">Majadahonda</span>
                     </span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-6">
+                <nav className="hidden md:flex items-center gap-8">
                     {routes.map((route) => (
                         <Link
                             key={route.href}
                             href={route.href}
                             className={cn(
-                                "text-sm font-medium transition-colors hover:text-secondary",
-                                isScrolled ? "text-foreground" : "text-white shadow-sm drop-shadow-md"
+                                "text-sm font-medium uppercase tracking-widest transition-colors hover:text-secondary",
+                                isScrolled || isLightPage ? "text-primary" : "text-white/90 hover:text-white"
                             )}
                         >
                             {route.label}
                         </Link>
                     ))}
-                    <Button asChild className="gap-2 font-semibold shadow-lg hover:shadow-xl transition-all">
+                    <Button
+                        asChild
+                        className={cn(
+                            "gap-2 font-semibold shadow-lg hover:shadow-xl transition-all rounded-full px-6",
+                            isScrolled || isLightPage
+                                ? "bg-primary text-white hover:bg-primary/90"
+                                : "bg-white text-primary hover:bg-stone-100" // Inverted on transparent header
+                        )}
+                    >
                         <a href="tel:+34631543707">
                             <Phone className="w-4 h-4" />
                             631 543 707
@@ -87,7 +106,7 @@ export function Header() {
 
                     <Sheet>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" aria-label="Menu">
+                            <Button variant="ghost" size="icon" aria-label="Menu" className={isScrolled || isLightPage ? "text-primary" : "text-white"}>
                                 <Menu className="w-6 h-6" />
                             </Button>
                         </SheetTrigger>
@@ -108,6 +127,12 @@ export function Header() {
                                     ))}
                                     <Link
                                         href="/"
+                                        onClick={(e) => {
+                                            if (pathname === "/") {
+                                                e.preventDefault();
+                                                window.scrollTo({ top: 0, behavior: "smooth" });
+                                            }
+                                        }}
                                         className="text-lg font-medium hover:text-secondary transition-colors border-b pb-2"
                                     >
                                         Inicio

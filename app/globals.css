@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-serif: var(--font-playfair);
+  --font-serif: var(--font-bodoni);
   --font-sans: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -48,37 +48,42 @@
 
 :root {
   --radius: 0.625rem;
-  /* Stone-50 */
-  --background: oklch(0.985 0.002 90.11);
-  /* Slate-900 */
-  --foreground: oklch(0.208 0.042 265.755);
 
+  /* BASE: Alabaster / White Smoke */
+  --background: oklch(0.97 0.005 106.6);
+  /* Warm White */
+  --foreground: oklch(0.25 0.02 260);
+  /* Soft Black */
+
+  /* CARDS: Pure White */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.208 0.042 265.755);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.25 0.02 260);
 
-  /* Emerald-900 (Atelier Green) */
-  --primary: oklch(0.24 0.08 148);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.02 260);
+
+  /* PRIMARY: Deep Charcoal / Midnight (Sophisticated) */
+  --primary: oklch(0.2 0.02 265);
   --primary-foreground: oklch(0.985 0.002 90.11);
 
-  /* Amber-700 (Atelier Gold) */
-  --secondary: oklch(0.6 0.15 70);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
+  /* SECONDARY: Muted Bronze / Champagne Gold (Luxury Accent) - NO ORANGE */
+  --secondary: oklch(0.65 0.12 75);
+  --secondary-foreground: oklch(0.2 0.02 265);
 
-  --muted: oklch(0.967 0.003 264.54);
-  --muted-foreground: oklch(0.552 0.016 285.94);
+  /* MUTED: Warm Greige / Taupe */
+  --muted: oklch(0.94 0.01 90);
+  --muted-foreground: oklch(0.5 0.02 90);
 
-  /* Amber-700 as accent */
-  --accent: oklch(0.587 0.16 63.85);
+  /* ACCENT: Deep Olive (Natural elements) */
+  --accent: oklch(0.45 0.08 135);
   --accent-foreground: oklch(0.985 0.002 90.11);
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0.002 90.11);
 
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.208 0.042 265.755);
+  --border: oklch(0.90 0.01 90);
+  --input: oklch(0.90 0.01 90);
+  --ring: oklch(0.65 0.12 75);
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -97,24 +102,25 @@
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
+  --background: oklch(0.15 0.02 265);
+  /* Deep Charcoal BG */
+  --foreground: oklch(0.95 0.01 100);
+  --card: oklch(0.2 0.02 265);
+  --card-foreground: oklch(0.95 0.01 100);
+  --popover: oklch(0.2 0.02 265);
+  --popover-foreground: oklch(0.95 0.01 100);
+  --primary: oklch(0.95 0.01 100);
+  --primary-foreground: oklch(0.2 0.02 265);
+  --secondary: oklch(0.7 0.12 75);
+  --secondary-foreground: oklch(0.2 0.02 265);
+  --muted: oklch(0.25 0.02 265);
+  --muted-foreground: oklch(0.7 0.02 265);
+  --accent: oklch(0.7 0.12 75);
+  --accent-foreground: oklch(0.985 0.002 90.11);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
+  --border: oklch(0.3 0.02 265);
+  --input: oklch(0.3 0.02 265);
+  --ring: oklch(0.7 0.12 75);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -138,4 +144,18 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }

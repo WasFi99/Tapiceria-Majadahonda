@@ -5,7 +5,7 @@ import { BeforeAfterSlider } from "@/components/features/BeforeAfterSlider";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Tapicero en Majadahonda | Presupuesto Gratis | Recogida a Domicilio",
+    title: "Tapicería en Majadahonda | Restauración de Muebles y Chill Out",
     description: "Tapicería experta en Majadahonda. Restauramos sofás cerca de Gran Plaza 2 y El Carralero. Telas Aquaclean y acabados de lujo.",
 };
 

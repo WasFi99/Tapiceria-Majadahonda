@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Sofa, Armchair, Bed, Camera, MessageCircle, ArrowRight } from "lucide-react";
+import { Sofa, Armchair, Bed, Camera, MessageCircle, ArrowRight, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FURNITURE_TYPES = [
@@ -35,6 +35,7 @@ export function BudgetCalculator() {
         condition: "",
         fabric: "",
         hasPhoto: false,
+        photoPreview: "",
     });
 
     const handleNext = () => setStep((p) => p + 1);
@@ -160,57 +161,62 @@ ${data.hasPhoto ? '(Tengo la foto lista)' : ''}`;
                                     className="space-y-6"
                                 >
                                     <Label className="text-lg font-semibold">4. Foto del mueble (Crucial)</Label>
-                                    <div className="border-2 border-dashed border-red-200 rounded-xl p-8 text-center bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer group" onClick={() => setData({ ...data, hasPhoto: true })}>
-                                        <div className="mx-auto w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                                            <Camera className="w-6 h-6 text-red-400" />
-                                        </div>
-                                        <p className="text-sm text-slate-600 mb-4 font-medium">
-                                            Para un diagnóstico preciso, necesitamos ver la pieza.
-                                            <br />
-                                            <span className="text-xs text-muted-foreground font-normal">Confirma que tienes la foto lista para enviarla al Maestro Tapicero.</span>
-                                        </p>
-                                        <Button variant="outline" className={`border-red-200 ${data.hasPhoto ? 'bg-red-100 text-red-800' : 'text-red-700'}`}>
-                                            {data.hasPhoto ? "¡Foto Confirmada!" : "Tengo la foto lista"}
+                                    <div
+                                        className="border-2 border-dashed border-red-200 rounded-xl p-8 text-center bg-red-50/50 hover:bg-red-50 transition-colors cursor-pointer group relative overflow-hidden"
+                                        onClick={() => document.getElementById('photo-upload')?.click()}
+                                    >
+                                        <input
+                                            type="file"
+                                            id="photo-upload"
+                                            className="hidden"
+                                            accept="image/*"
+                                            onChange={(e) => {
+                                                const file = e.target.files?.[0];
+                                                if (file) {
+                                                    const url = URL.createObjectURL(file);
+                                                    setData({ ...data, hasPhoto: true, photoPreview: url });
+                                                }
+                                            }}
+                                        />
+
+                                        {data.photoPreview ? (
+                                            <div className="absolute inset-0 z-10">
+                                                <img src={data.photoPreview} alt="Preview" className="w-full h-full object-cover opacity-50" />
+                                                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                                    <p className="text-white font-bold text-lg flex items-center gap-2">
+                                                        <CheckCircle2 className="w-6 h-6" /> Foto Cargada
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div className="mx-auto w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform relative z-0">
+                                                    <Camera className="w-6 h-6 text-red-400" />
+                                                </div>
+                                                <p className="text-sm text-slate-600 mb-4 font-medium relative z-0">
+                                                    Pulsa aquí para subir una foto de tu galería.
+                                                    <br />
+                                                    <span className="text-xs text-muted-foreground font-normal">Ayudará al tapicero a darte un precio exacto.</span>
+                                                </p>
+                                            </>
+                                        )}
+
+                                        <Button variant="outline" className={`relative z-20 border-red-200 ${data.hasPhoto ? 'bg-red-100 text-red-800' : 'text-red-700'}`}>
+                                            {data.hasPhoto ? "Cambiar Foto" : "Subir Foto"}
                                         </Button>
                                     </div>
                                     <div className="flex justify-between pt-4">
                                         <Button variant="ghost" onClick={handleBack}>Atrás</Button>
-                                        <Button onClick={handleNext} disabled={!data.hasPhoto} className="gap-2 bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-200">
-                                            Ver Análisis <ArrowRight className="w-4 h-4" />
+                                        <Button
+                                            className="gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg h-12"
+                                            asChild
+                                        >
+                                            <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer">
+                                                <MessageCircle className="w-5 h-5" />
+                                                Enviar a WhatsApp
+                                            </a>
                                         </Button>
                                     </div>
-                                </motion.div>
-                            )}
-
-                            {step === 5 && (
-                                <motion.div
-                                    key="step5"
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    className="text-center space-y-6"
-                                >
-                                    <div className="bg-green-50 p-6 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-4 animate-bounce">
-                                        <MessageCircle className="w-10 h-10 text-green-600" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold">¡Gracias! Datos Recibidos</h3>
-                                    <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 text-left">
-                                        <p className="text-sm text-slate-700 mb-2"><strong>Estado:</strong> <span className="text-amber-600">Revisión Técnica en Curso</span></p>
-                                        <p className="text-sm text-slate-600">
-                                            Hemos analizado tus datos. Un técnico maestro está esperando tu foto para calcular los metraje de tela exactos.
-                                            Te enviaremos el presupuesto cerrado por WhatsApp en menos de 15 minutos.
-                                        </p>
-                                    </div>
-
-                                    <Button size="lg" className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white gap-2 shadow-lg h-14 text-lg animate-pulse" asChild>
-                                        <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer">
-                                            <MessageCircle className="w-6 h-6" />
-                                            Completar Valoración en WhatsApp
-                                        </a>
-                                    </Button>
-                                    <Button variant="ghost" size="sm" onClick={handleBack} className="text-muted-foreground">
-                                        Volver y editar
-                                    </Button>
                                 </motion.div>
                             )}
                         </AnimatePresence>

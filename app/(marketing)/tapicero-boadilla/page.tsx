@@ -5,7 +5,7 @@ import { BeforeAfterSlider } from "@/components/features/BeforeAfterSlider";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Tapicería de Lujo en Boadilla del Monte | Restauración Exclusiva",
+    title: "Tapicería en Boadilla del Monte | Restauración de Muebles Exclusivos",
     description: "Servicio premium de tapicería en Boadilla, Montepríncipe y Las Lomas. Restauramos muebles de firma y antigüedades. Recogida en urbanizaciones.",
 };
 

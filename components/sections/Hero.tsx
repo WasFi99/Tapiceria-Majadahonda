@@ -12,8 +12,8 @@ interface HeroProps {
 export function Hero({
     title = <>Renovamos tus Muebles,<br className="hidden sm:block" /> <span className="text-secondary bg-clip-text">Recuperamos tus Recuerdos.</span></>,
     subtitle = "Artesanía, lujo y rapidez en Majadahonda. Especialistas en telas antimanchas Aquaclean.",
-    imageSrc = "/assets/images/hero-bg.png",
-    imageAlt = "Sofá de terciopelo esmeralda restaurado por Tapicería Majadahonda"
+    imageSrc = "/assets/images/hero-luxury.png",
+    imageAlt = "Sofá de terciopelo esmeralda en salón de lujo parisino"
 }: HeroProps) {
     return (
         <section className="relative h-[85vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden">
