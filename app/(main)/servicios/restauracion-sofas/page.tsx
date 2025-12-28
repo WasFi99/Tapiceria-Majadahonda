@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 
 export default function SofaPage() {
     return (
-        <article>
-            <link rel="amphtml" href="https://tapiceriamajadahonda.es/amp/servicios/restauracion-sofas" />
+        <main className="min-h-screen bg-background pt-24">
             {/* Hero Service */}
             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
                 <Image
@@ -93,6 +92,6 @@ export default function SofaPage() {
                     </div>
                 </div>
             </section>
-        </article>
+        </main>
     );
 }

@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 
 export default function ChairsPage() {
     return (
-        <article>
-            <link rel="amphtml" href="https://tapiceriamajadahonda.es/amp/servicios/tapizado-sillas" />
+        <main className="min-h-screen bg-background pt-24">
             <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden bg-stone-900">
                 <div className="absolute inset-0">
                     <Image
@@ -59,6 +58,6 @@ export default function ChairsPage() {
                     </div>
                 </div>
             </section>
-        </article>
+        </main>
     );
 }

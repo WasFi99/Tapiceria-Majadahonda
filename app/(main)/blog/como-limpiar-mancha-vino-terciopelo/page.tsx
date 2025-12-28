@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default function ArticlePage() {
     return (
         <main className="min-h-screen bg-background font-sans">
-            <link rel="amphtml" href="https://tapiceriamajadahonda.es/amp/blog/como-limpiar-mancha-vino-terciopelo" />
             <Header />
             <article className="container mx-auto px-4 py-20 max-w-3xl">
                 <header className="mb-10 text-center">
