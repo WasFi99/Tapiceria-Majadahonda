@@ -38,7 +38,15 @@ export function ContactForm() {
                 body: JSON.stringify(values),
             });
 
-            const data = await response.json();
+            // Handle non-JSON responses
+            const text = await response.text();
+            let data;
+            try {
+                data = text ? JSON.parse(text) : {};
+            } catch {
+                console.error("Response not JSON:", text);
+                throw new Error("Error del servidor. Por favor, inténtalo de nuevo.");
+            }
 
             if (!response.ok) {
                 throw new Error(data.error || "Error al enviar el mensaje");
@@ -46,6 +54,7 @@ export function ContactForm() {
 
             setIsSuccess(true);
         } catch (err) {
+            console.error("Form submission error:", err);
             setError(err instanceof Error ? err.message : "Error al enviar el mensaje");
         } finally {
             setIsSubmitting(false);

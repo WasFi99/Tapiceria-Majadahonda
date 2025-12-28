@@ -5,24 +5,25 @@ import { NextResponse } from "next/server";
 const getResend = () => new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
-    try {
-        const { name, phone, email, message } = await request.json();
+  try {
+    const { name, phone, email, message } = await request.json();
 
-        // Validate required fields
-        if (!name || !phone || !email || !message) {
-            return NextResponse.json(
-                { error: "Todos los campos son obligatorios" },
-                { status: 400 }
-            );
-        }
+    // Validate required fields
+    if (!name || !phone || !email || !message) {
+      return NextResponse.json(
+        { error: "Todos los campos son obligatorios" },
+        { status: 400 }
+      );
+    }
 
-        // Send email using Resend
-        const { data, error } = await getResend().emails.send({
-            from: "Tapicería Majadahonda <contacto@tapiceriamajadahonda.es>",
-            to: ["majadahondatapicero@gmail.com"],
-            replyTo: email,
-            subject: `Nueva consulta de ${name} - Tapicería Majadahonda`,
-            html: `
+    // Send email using Resend
+    // Note: Using onboarding@resend.dev until custom domain is verified
+    const { data, error } = await getResend().emails.send({
+      from: "Tapicería Majadahonda <onboarding@resend.dev>",
+      to: ["majadahondatapicero@gmail.com"],
+      replyTo: email,
+      subject: `Nueva consulta de ${name} - Tapicería Majadahonda`,
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #1a1a2e; border-bottom: 2px solid #c9a227; padding-bottom: 10px;">
             Nueva Consulta desde la Web
@@ -53,22 +54,22 @@ export async function POST(request: Request) {
           </p>
         </div>
       `,
-        });
+    });
 
-        if (error) {
-            console.error("Resend error:", error);
-            return NextResponse.json(
-                { error: "Error al enviar el mensaje" },
-                { status: 500 }
-            );
-        }
-
-        return NextResponse.json({ success: true, id: data?.id });
-    } catch (error) {
-        console.error("API error:", error);
-        return NextResponse.json(
-            { error: "Error del servidor" },
-            { status: 500 }
-        );
+    if (error) {
+      console.error("Resend error:", JSON.stringify(error));
+      return NextResponse.json(
+        { error: `Error al enviar: ${error.message || 'Unknown error'}` },
+        { status: 500 }
+      );
     }
+
+    return NextResponse.json({ success: true, id: data?.id });
+  } catch (error) {
+    console.error("API error:", error);
+    return NextResponse.json(
+      { error: "Error del servidor" },
+      { status: 500 }
+    );
+  }
 }
