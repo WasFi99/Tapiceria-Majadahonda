@@ -2,7 +2,7 @@ import React from 'react';
 import { AmpHeader } from '@/components/amp/AmpHeader';
 import { AmpFooter } from '@/components/amp/AmpFooter';
 import { AmpImage } from '@/components/amp/AmpImage';
-import { ServiceGrid } from '@/components/sections/ServiceGrid';
+import { AmpServiceGrid } from '@/components/amp/AmpServiceGrid';
 import { MessageCircle, Phone, ArrowRight } from 'lucide-react';
 import { Metadata } from 'next';
 
@@ -74,7 +74,11 @@ export default function AmpHome() {
             {/* ServiceGrid uses 'next/link', which renders <a> tag. Safe for AMP. */}
             {/* ServiceGrid uses 'lucide-react'. SVG safe. */}
             {/* ServiceGrid uses 'Card'. Divs safe. */}
-            <ServiceGrid />
+            {/* SERVICES GRID (Reused component) */}
+            {/* ServiceGrid uses 'next/link', which renders <a> tag. Safe for AMP. */}
+            {/* ServiceGrid uses 'lucide-react'. SVG safe. */}
+            {/* ServiceGrid uses 'Card'. Divs safe. */}
+            <AmpServiceGrid />
 
             {/* TRANSFORM CTA (Replaces Budget Calculator) */}
             <section className="py-16 bg-white text-center">
