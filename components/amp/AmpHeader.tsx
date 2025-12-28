@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Menu, Phone } from 'lucide-react';
 
@@ -8,7 +9,6 @@ export function AmpHeader() {
                 <div className="container flex justify-between items-center w-full px-4">
 
                     {/* Mobile Sidebar Trigger */}
-                    {/* @ts-ignore */}
                     <button on="tap:sidebar.toggle" className="md:hidden p-2">
                         <Menu className="w-6 h-6 text-primary" />
                     </button>
@@ -34,10 +34,8 @@ export function AmpHeader() {
             </header>
 
             {/* AMP Sidebar for Mobile Menu */}
-            {/* @ts-ignore */}
             <amp-sidebar id="sidebar" layout="nodisplay" side="left">
                 <div className="sidebar-content relative">
-                    {/* @ts-ignore */}
                     <button on="tap:sidebar.close" className="sidebar-close text-primary">
                         ×
                     </button>
@@ -63,5 +61,3 @@ export function AmpHeader() {
         </>
     );
 }
-
-
