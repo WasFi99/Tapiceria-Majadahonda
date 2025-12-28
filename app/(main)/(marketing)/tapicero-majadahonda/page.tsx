@@ -1,8 +1,13 @@
 import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
-import { BeforeAfterSlider } from "@/components/features/BeforeAfterSlider";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+const BeforeAfterSlider = dynamic(
+    () => import("@/components/features/BeforeAfterSlider").then(mod => mod.BeforeAfterSlider),
+    { ssr: false, loading: () => <div className="h-[400px] bg-stone-100 animate-pulse rounded-2xl" /> }
+);
 
 export const metadata: Metadata = {
     title: "Tapicería en Majadahonda | Restauración de Muebles y Chill Out",
