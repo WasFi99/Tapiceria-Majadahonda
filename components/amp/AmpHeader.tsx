@@ -8,6 +8,7 @@ export function AmpHeader() {
                 <div className="container flex justify-between items-center w-full px-4">
 
                     {/* Mobile Sidebar Trigger */}
+                    {/* @ts-ignore */}
                     <button on="tap:sidebar.toggle" className="md:hidden p-2">
                         <Menu className="w-6 h-6 text-primary" />
                     </button>
@@ -35,6 +36,7 @@ export function AmpHeader() {
             {/* AMP Sidebar for Mobile Menu */}
             <amp-sidebar id="sidebar" layout="nodisplay" side="left">
                 <div className="sidebar-content relative">
+                    {/* @ts-ignore */}
                     <button on="tap:sidebar.close" className="sidebar-close text-primary">
                         ×
                     </button>
