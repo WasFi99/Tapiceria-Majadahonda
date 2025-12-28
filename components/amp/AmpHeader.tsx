@@ -34,6 +34,7 @@ export function AmpHeader() {
             </header>
 
             {/* AMP Sidebar for Mobile Menu */}
+            {/* @ts-ignore */}
             <amp-sidebar id="sidebar" layout="nodisplay" side="left">
                 <div className="sidebar-content relative">
                     {/* @ts-ignore */}
@@ -62,12 +63,5 @@ export function AmpHeader() {
         </>
     );
 }
-// Declare amp-sidebar for TSX
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'amp-sidebar': any;
-        }
-    }
-}
+
 
