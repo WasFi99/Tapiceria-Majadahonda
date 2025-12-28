@@ -45,27 +45,47 @@ export function Header() {
                     : "bg-transparent border-transparent"
             )}
         >
-            <div className="w-full px-4 md:px-8 h-20 flex items-center justify-between">
-                {/* Logo */}
-                <Link
-                    href="/"
-                    onClick={(e) => {
-                        if (pathname === "/") {
-                            e.preventDefault();
-                            window.scrollTo({ top: 0, behavior: "smooth" });
-                        }
-                    }}
-                    className="flex items-center gap-2 z-50 group"
-                >
-                    <span className={cn(
-                        "text-lg md:text-2xl font-serif font-bold tracking-tight transition-colors",
-                        isScrolled || isLightPage ? "text-primary" : "text-white"
-                    )}>
-                        Tapicería<span className="text-secondary italic">Majadahonda</span>
-                    </span>
-                </Link>
+            <div className="w-full px-4 md:px-8 h-20 flex items-center justify-between relative">
 
-                {/* Desktop Nav */}
+                {/* Mobile: Left - Call Button (Symmetrical Balance) */}
+                <div className="md:hidden z-50">
+                    <Button
+                        asChild
+                        size="icon"
+                        variant="ghost"
+                        className={cn(
+                            "rounded-full transition-colors",
+                            isScrolled || isLightPage ? "text-primary hover:bg-stone-100" : "text-white hover:bg-white/10"
+                        )}
+                    >
+                        <a href="tel:+34631543707" aria-label="Llamar">
+                            <Phone className="w-6 h-6" />
+                        </a>
+                    </Button>
+                </div>
+
+                {/* Logo - Absolute Center on Mobile, Left on Desktop */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:static md:translate-x-0 md:translate-y-0 z-40">
+                    <Link
+                        href="/"
+                        onClick={(e) => {
+                            if (pathname === "/") {
+                                e.preventDefault();
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                            }
+                        }}
+                        className="flex items-center gap-2 group whitespace-nowrap"
+                    >
+                        <span className={cn(
+                            "text-xl md:text-2xl font-serif font-bold tracking-tight transition-colors",
+                            isScrolled || isLightPage ? "text-primary" : "text-white"
+                        )}>
+                            Tapicería<span className="text-secondary italic">Majadahonda</span>
+                        </span>
+                    </Link>
+                </div>
+
+                {/* Desktop Nav - Right */}
                 <nav className="hidden md:flex items-center gap-8">
                     {routes.map((route) => (
                         <Link
@@ -85,7 +105,7 @@ export function Header() {
                             "gap-2 font-semibold shadow-lg hover:shadow-xl transition-all rounded-full px-6",
                             isScrolled || isLightPage
                                 ? "bg-primary text-white hover:bg-primary/90"
-                                : "bg-white text-primary hover:bg-stone-100" // Inverted on transparent header
+                                : "bg-white text-primary hover:bg-stone-100"
                         )}
                     >
                         <a href="tel:+34631543707">
@@ -95,36 +115,20 @@ export function Header() {
                     </Button>
                 </nav>
 
-                <div className="flex md:hidden items-center gap-2">
-                    <Button
-                        asChild
-                        size="sm"
-                        className={cn(
-                            "gap-2 font-semibold shadow-md transition-colors",
-                            isScrolled || isLightPage
-                                ? "bg-primary text-white hover:bg-primary/90"
-                                : "bg-white text-primary hover:bg-stone-100" // Inverted on transparent header
-                        )}
-                    >
-                        <a href="tel:+34631543707">
-                            <Phone className="w-4 h-4" />
-                            Llamar
-                        </a>
-                    </Button>
-
+                {/* Mobile: Right - Menu Button */}
+                <div className="md:hidden z-50">
                     <Sheet>
                         <SheetTrigger asChild>
                             <Button
                                 size="icon"
+                                variant="ghost"
                                 aria-label="Menu"
                                 className={cn(
-                                    "rounded-full shadow-md transition-colors",
-                                    isScrolled || isLightPage
-                                        ? "bg-primary text-white hover:bg-primary/90"
-                                        : "bg-white text-primary hover:bg-stone-100"
+                                    "rounded-full transition-colors",
+                                    isScrolled || isLightPage ? "text-primary hover:bg-stone-100" : "text-white hover:bg-white/10"
                                 )}
                             >
-                                <Menu className="w-5 h-5" />
+                                <Menu className="w-7 h-7" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px] sm:w-[400px]">
