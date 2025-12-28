@@ -40,7 +40,11 @@ export function Header() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
-                "bg-white/95 backdrop-blur-md border-b border-stone-100 shadow-sm"
+                isScrolled || isLightPage
+                    ? "bg-white/95 backdrop-blur-md shadow-sm"
+                    : "bg-transparent",
+                // Only show border when scrolled AND has shadow
+                isScrolled ? "border-b border-stone-100/50" : "border-b border-transparent"
             )}
         >
             <div className="w-full px-4 md:px-8 h-20 flex items-center justify-between relative">
@@ -51,7 +55,10 @@ export function Header() {
                         asChild
                         size="icon"
                         variant="ghost"
-                        className="rounded-full transition-colors text-primary hover:bg-stone-100"
+                        className={cn(
+                            "rounded-full transition-colors",
+                            isScrolled || isLightPage ? "text-primary hover:bg-stone-100" : "text-white hover:bg-white/20"
+                        )}
                     >
                         <a href="tel:+34631543707" aria-label="Llamar">
                             <Phone className="w-6 h-6" />
@@ -71,7 +78,10 @@ export function Header() {
                         }}
                         className="flex items-center gap-2 group whitespace-nowrap"
                     >
-                        <span className="text-xl md:text-2xl font-serif font-bold tracking-tight text-primary">
+                        <span className={cn(
+                            "text-xl md:text-2xl font-serif font-bold tracking-tight transition-colors",
+                            isScrolled || isLightPage ? "text-primary" : "text-white"
+                        )}>
                             Tapicería<span className="text-secondary italic">Majadahonda</span>
                         </span>
                     </Link>
@@ -83,14 +93,22 @@ export function Header() {
                         <Link
                             key={route.href}
                             href={route.href}
-                            className="text-sm font-medium uppercase tracking-widest transition-colors hover:text-secondary text-primary"
+                            className={cn(
+                                "text-sm font-medium uppercase tracking-widest transition-colors hover:text-secondary",
+                                isScrolled || isLightPage ? "text-primary" : "text-white/90 hover:text-white"
+                            )}
                         >
                             {route.label}
                         </Link>
                     ))}
                     <Button
                         asChild
-                        className="gap-2 font-semibold shadow-lg hover:shadow-xl transition-all rounded-full px-6 bg-primary text-white hover:bg-primary/90"
+                        className={cn(
+                            "gap-2 font-semibold shadow-lg hover:shadow-xl transition-all rounded-full px-6",
+                            isScrolled || isLightPage
+                                ? "bg-primary text-white hover:bg-primary/90"
+                                : "bg-white text-primary hover:bg-stone-100"
+                        )}
                     >
                         <a href="tel:+34631543707">
                             <Phone className="w-4 h-4" />
@@ -107,7 +125,10 @@ export function Header() {
                                 size="icon"
                                 variant="ghost"
                                 aria-label="Menu"
-                                className="rounded-full transition-colors text-primary hover:bg-stone-100"
+                                className={cn(
+                                    "rounded-full transition-colors",
+                                    isScrolled || isLightPage ? "text-primary hover:bg-stone-100" : "text-white hover:bg-white/20"
+                                )}
                             >
                                 <Menu className="w-7 h-7" />
                             </Button>
