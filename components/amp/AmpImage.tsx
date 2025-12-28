@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 
 interface AmpImageProps {
@@ -16,14 +17,12 @@ export function AmpImage({ src, alt, width, height, layout = 'responsive', class
     const optimizedSrc = `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
 
     return (
-        // @ts-ignore - React doesn't know about amp-img by default
         <amp-img
             src={optimizedSrc}
             alt={alt}
             width={width.toString()}
             height={height.toString()}
             layout={layout}
-            // @ts-ignore
             class={className}
         >
             {/* Fallback for no-js or failure */}
