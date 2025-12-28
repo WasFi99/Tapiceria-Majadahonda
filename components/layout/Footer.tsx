@@ -5,21 +5,21 @@ import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
 
 export function Footer() {
     return (
-        <footer className="bg-stone-900 text-stone-300 pt-16 pb-8 text-sm">
+        <footer className="bg-stone-900 text-stone-200 pt-16 pb-8 text-sm">
             <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12 mb-12">
                 {/* Brand */}
                 <div className="space-y-4">
                     <h3 className="text-2xl font-serif font-bold text-white tracking-tight">
                         Tapicería<span className="text-secondary italic">Majadahonda</span>
                     </h3>
-                    <p className="leading-relaxed text-stone-400">
+                    <p className="leading-relaxed text-stone-300">
                         Rescatamos la esencia de tus muebles con técnicas artesanales y materiales de vanguardia. Lujo sostenible para tu hogar.
                     </p>
                     <div className="flex gap-4">
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Síguenos en Instagram">
                             <Instagram className="w-5 h-5" />
                         </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Síguenos en Facebook">
                             <Facebook className="w-5 h-5" />
                         </a>
                     </div>

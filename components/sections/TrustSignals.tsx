@@ -14,7 +14,7 @@ const ALL_BRANDS = Array(REPEATS).fill(BRANDS).flat();
 function BrandItem({ brand }: { brand: { name: string, description: string } }) {
     return (
         <div className="flex flex-col items-center text-center mx-0 min-w-[140px] md:min-w-[200px] shrink-0 hover:scale-105 transition-transform duration-300 snap-center">
-            <span className="text-xl md:text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors cursor-pointer select-none">
+            <span className="text-xl md:text-3xl font-serif font-bold text-stone-500 hover:text-primary transition-colors cursor-pointer select-none">
                 {brand.name}
             </span>
         </div>
