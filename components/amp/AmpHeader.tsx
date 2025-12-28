@@ -63,11 +63,4 @@ export function AmpHeader() {
     );
 }
 
-// Declare amp-sidebar for TSX
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            'amp-sidebar': any;
-        }
-    }
 }

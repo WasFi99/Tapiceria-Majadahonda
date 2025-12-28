@@ -18,6 +18,7 @@ export function AmpImage({ src, alt, width, height, layout = 'responsive', class
             width={width.toString()}
             height={height.toString()}
             layout={layout}
+            // @ts-ignore
             class={className}
         />
     );
